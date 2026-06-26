@@ -409,6 +409,20 @@ h1, h2, h3, .section-title, .big-logo, .num {
 .service-item p { max-width: 350px; font-size: 0.9rem; color: #777; text-align: right; }
 .service-item:hover { border-bottom-color: var(--orange); background: linear-gradient(to right, rgba(255, 77, 0, 0.03), transparent); }
 
+/* Solo celular: apilar número, título y descripción en lugar de
+   comprimirlos en una sola fila. El escritorio queda igual. */
+@media (max-width: 768px) {
+    .service-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 40px 0;
+    }
+    .service-item .num { width: auto; }
+    .service-item h2 { padding-left: 0; }
+    .service-item p { max-width: 100%; text-align: left; }
+}
+
 /* 7. PORTFOLIO — CARRUSEL RUEDA 3D */
 .portfolio-slider { padding: 100px 0 60px; overflow: hidden; position: relative; }
 
@@ -573,6 +587,24 @@ h1, h2, h3, .section-title, .big-logo, .num {
     .video-card.right1 { transform: translate3d(55vw, 0, -200px) rotateY(-30deg); width: 40vw; height: 22vw; }
 }
 
+/* Ajuste EXCLUSIVO para celular en vertical: tarjetas laterales más discretas
+   y altura fija para que no se vea apretado. No afecta escritorio ni horizontal. */
+@media (max-width: 600px) and (orientation: portrait) {
+    .carousel-container { height: 260px; perspective: 900px; }
+    .video-card.center { width: 86vw; height: 220px; }
+    .video-card.left1 {
+        width: 28vw; height: 170px;
+        transform: translate3d(-46vw, 0, -260px) rotateY(35deg);
+        opacity: 0.4;
+    }
+    .video-card.right1 {
+        width: 28vw; height: 170px;
+        transform: translate3d(46vw, 0, -260px) rotateY(-35deg);
+        opacity: 0.4;
+    }
+    .video-card.far { opacity: 0; }
+}
+
 
 /* 8. MODO CINE (MODAL) PREMIUM */
 .video-modal {
@@ -708,6 +740,11 @@ footer {
     .contact-wrapper { grid-template-columns: 1fr; }
     .video-card { flex: 0 0 85vw; height: 250px; }
     .hero h1 { letter-spacing: 0.1em !important; }
+
+    /* El selector de idioma se ve apretado junto al botón de WhatsApp y la
+       hamburguesa en celular. Ya está disponible dentro del menú móvil
+       (.mobile-lang-switch), así que en el navbar solo lo ocultamos aquí. */
+    .nav-right .lang-selector { display: none; }
 }
 
 @keyframes pulse-orange {
